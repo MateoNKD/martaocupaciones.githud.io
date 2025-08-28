@@ -6,122 +6,83 @@
   <title>MARTINA LA MEJOR PROFE</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ============ Tus estilos tal cual ============ */
     :root{
-      --bg1:#0f1021;
-      --bg2:#1b1e36;
-      --ac1:#7c3aed;
-      --ac2:#22d3ee;
-      --ac3:#f472b6;
-      --card:#101225cc;
-      --text:#e5e7eb;
-      --muted:#9ca3af;
-      --ok:#10b981;
-      --warn:#f59e0b;
-      --err:#ef4444;
+      --bg1:#0f1021; --bg2:#1b1e36;
+      --ac1:#7c3aed; --ac2:#22d3ee; --ac3:#f472b6;
+      --card:#101225cc; --text:#e5e7eb; --muted:#9ca3af;
+      --ok:#10b981; --err:#ef4444;
       --radius:1.25rem;
     }
     *{ box-sizing:border-box; }
-    html,body{ height:100%; }
     body{
-      margin:0;
-      font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
-      color:var(--text);
-      background: radial-gradient(60vw 60vw at 20% 10%, #1b2550 0%, transparent 60%),
-                  radial-gradient(50vw 50vw at 80% 10%, #1a2238 0%, transparent 60%),
-                  radial-gradient(70vw 70vw at 50% 110%, #241a3b 0%, transparent 60%),
-                  linear-gradient(180deg, var(--bg1), var(--bg2));
-      overflow-x:hidden;
+      margin:0; font-family:"Poppins",sans-serif; color:var(--text);
+      background: linear-gradient(180deg,var(--bg1),var(--bg2));
+      min-height:100vh;
     }
-    /* Fondo animado */
-    .constelaciones, .constelaciones::before, .constelaciones::after{
-      position:fixed; inset:0; content:""; pointer-events:none;
-    }
-    .constelaciones{ 
-      background: repeating-radial-gradient(circle at 20% 30%, rgba(255,255,255,.07) 0 1px, transparent 2px 100px);
-      mix-blend-mode:screen; opacity:.15; filter:blur(0.3px);
-      animation: parpadeo 6s linear infinite;
-    }
-    .constelaciones::before{ 
-      --s: 2px; --d: 140s; --n: 250; 
-      background: transparent; 
-      box-shadow: 
-        10vw 5vh #fff, 30vw 8vh #fff, 50vw 9vh #fff, 70vw 6vh #fff, 90vw 3vh #fff,
-        5vw 20vh #fff, 25vw 25vh #fff, 45vw 22vh #fff, 65vw 28vh #fff, 85vw 26vh #fff,
-        15vw 40vh #fff, 35vw 38vh #fff, 55vw 44vh #fff, 75vw 41vh #fff, 95vw 39vh #fff,
-        12vw 60vh #fff, 32vw 58vh #fff, 52vw 64vh #fff, 72vw 61vh #fff, 92vw 59vh #fff,
-        7vw 80vh #fff, 27vw 78vh #fff, 47vw 84vh #fff, 67vw 81vh #fff, 87vw 79vh #fff;
-      width:var(--s); height:var(--s); border-radius:50%;
-      animation: estrellas var(--d) linear infinite;
-    }
-    .constelaciones::after{
-      background: radial-gradient(600px 400px at 10% 80%, rgba(124,58,237,.35), transparent 60%),
-                  radial-gradient(500px 350px at 90% 30%, rgba(34,211,238,.35), transparent 60%),
-                  radial-gradient(700px 500px at 50% -10%, rgba(244,114,182,.25), transparent 60%);
-      filter: blur(30px) saturate(120%);
-      animation: orbes 20s ease-in-out infinite alternate;
-      opacity:.8;
-    }
-    @keyframes parpadeo{ 0%,100%{opacity:.15} 50%{opacity:.25} }
-    @keyframes estrellas{ 0%{ transform:translateY(0) } 100%{ transform:translateY(100vh) } }
-    @keyframes orbes{ from{ transform:translateY(-20px)} to{ transform:translateY(20px)} }
-
-    /* Contenedor */
-    .wrap{ min-height:100dvh; display:grid; place-items:center; padding: clamp(16px, 4vw, 48px); }
+    .wrap{ display:grid; place-items:center; padding:30px; }
     .shell{
       position:relative; border-radius: calc(var(--radius) + 8px); padding:2px;
       background: conic-gradient(from var(--a), var(--ac1), var(--ac2), var(--ac3), var(--ac1));
       animation: rotar 12s linear infinite;
-      box-shadow: 0 10px 40px -10px rgba(0,0,0,.7);
+      box-shadow: 0 10px 40px -10px rgba(0,0,0,.7); width:100%; max-width:900px;
     }
     .card{
-      position:relative; z-index:1; border-radius:var(--radius);
-      background: linear-gradient(180deg, rgba(16,18,37,.75), rgba(16,18,37,.55));
-      backdrop-filter: blur(10px) saturate(120%);
-      -webkit-backdrop-filter: blur(10px) saturate(120%);
-      padding: clamp(20px, 4vw, 36px);
-      width: min(960px, 92vw);
+      border-radius:var(--radius);
+      background: linear-gradient(180deg, rgba(16,18,37,.8), rgba(16,18,37,.6));
+      backdrop-filter: blur(10px);
+      padding:24px; width:100%;
       box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), 0 12px 40px rgba(0,0,0,.35);
     }
-    @property --a{ syntax: '<angle>'; initial-value: 0deg; inherits: false; }
-    @keyframes rotar{ to{ --a: 360deg } }
-    .header{ display:flex; align-items:center; gap:14px; margin-bottom: 22px; }
-    .logo{
-      width:48px; height:48px; border-radius:14px; display:grid; place-items:center;
-      background: radial-gradient(circle at 30% 30%, #ffffff22 0 30%, transparent 35%),
-                  linear-gradient(135deg, var(--ac1), var(--ac2));
-      animation: flotar 4s ease-in-out infinite;
+    @property --a{ syntax:'<angle>'; initial-value:0deg; inherits:false }
+    @keyframes rotar{ to{ --a:360deg } }
+    .header{ display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+    .logo{ width:48px; height:48px; border-radius:14px; display:grid; place-items:center;
+      background: linear-gradient(135deg,var(--ac1),var(--ac2)); animation: flotar 4s infinite; }
+    .logo i{ font-style:normal; font-size:22px; font-weight:800 }
+    @keyframes flotar{ 0%,100%{ transform:translateY(0)} 50%{ transform:translateY(-6px)} }
+    .title{ font-size:24px; font-weight:700 }
+    .subtitle{ font-size:14px; color:var(--muted) }
+    form{ display:grid; grid-template-columns: repeat(12,1fr); gap:16px }
+    .field{ grid-column:span 12 }
+    @media(min-width:720px){
+      .field.half{ grid-column:span 6 }
+      .field.third{ grid-column:span 4 }
     }
-    .logo i{ font-style:normal; font-weight:800; font-size:22px; }
-    @keyframes flotar { 0%,100%{ transform:translateY(0)} 50%{ transform:translateY(-6px)} }
-    .title{ font-size: clamp(20px, 3.2vw, 30px); font-weight:700; }
-    .subtitle{ color:var(--muted); font-size: clamp(12px, 2.2vw, 14px); margin-top:2px }
-    form{ display:grid; grid-template-columns: repeat(12, 1fr); gap:16px; }
-    .field{ grid-column: span 12; position:relative; }
-    @media (min-width:720px){
-      .field.half{ grid-column: span 6; }
-      .field.third{ grid-column: span 4; }
-    }
-    .control{
-      background: #0b0d1a; border:1px solid #ffffff14; border-radius:14px; 
-      padding: 22px 16px 10px 16px; color:var(--text);
-    }
-    .control input, .control select, .control textarea{
+    .control{ background:#0b0d1a; border:1px solid #ffffff14; border-radius:14px;
+      padding:16px; }
+    .control input,.control select,.control textarea{
       width:100%; background:transparent; border:0; outline:0; color:var(--text);
-      font-size: clamp(14px, 2.6vw, 16px);
     }
-    .label{ position:absolute; left:14px; top:10px; font-size:12px; color:var(--muted); }
-    .actions{ display:flex; gap:12px; justify-content:flex-end; margin-top:8px }
-    .btn{
-      padding: 12px 18px; border-radius: 999px; font-weight:600;
-      background: linear-gradient(135deg, var(--ac2), var(--ac1));
-      color:white; border:0; cursor:pointer;
+    .actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:10px }
+    .btn{ padding:10px 16px; border-radius:999px; border:0; font-weight:600; cursor:pointer;
+      background:linear-gradient(135deg,var(--ac2),var(--ac1)); color:white; }
+    .btn.secondary{ background:#0b0d1a; border:1px solid #ffffff1a; }
+    /* ================== Lista actividades ================== */
+    #listaActividades{
+      margin-top:20px; max-height:0; overflow:hidden;
+      transition:max-height .7s ease, opacity .5s ease;
+      opacity:0;
     }
-    .btn.secondary{ background: #0b0d1a; border:1px solid #ffffff1a; }
+    #listaActividades.mostrar{ max-height:500px; opacity:1; }
+    .actividad{
+      background:#0f1122; border:1px solid #ffffff22; border-radius:14px;
+      padding:14px 18px; margin-bottom:12px;
+      display:flex; justify-content:space-between; align-items:center;
+      animation: aparecer .5s ease forwards;
+    }
+    @keyframes aparecer{ from{ transform:translateY(15px); opacity:0 } to{ transform:translateY(0); opacity:1 } }
+    .actividad-info{ flex:1 }
+    .actividad-titulo{ font-weight:600 }
+    .actividad-detalle{ font-size:13px; color:var(--muted) }
+    .actividad-acciones button{
+      margin-left:8px; border:0; padding:6px 12px; border-radius:8px; cursor:pointer;
+      font-size:12px; font-weight:600;
+    }
+    .editar{ background:var(--ac2); color:#fff }
+    .eliminar{ background:var(--err); color:#fff }
   </style>
 </head>
 <body>
-  <div class="constelaciones"></div>
   <div class="wrap">
     <div class="shell">
       <div class="card">
@@ -129,82 +90,88 @@
           <div class="logo"><i>★</i></div>
           <div>
             <div class="title">MARTINA LA MEJOR PROFE</div>
-            <div class="subtitle">Completa los campos y se guardarán ✨</div>
+            <div class="subtitle">Agenda interactiva ✨</div>
           </div>
         </div>
 
+        <!-- Formulario -->
         <form id="formActividad">
-          <div class="field half">
-            <label class="label" for="nombre">Nombre</label>
-            <div class="control"><input type="text" id="nombre" name="nombre" placeholder="Nombre"></div>
-          </div>
-          <div class="field half">
-            <label class="label" for="actividad">Actividad</label>
-            <div class="control"><input type="text" id="actividad" name="actividad" placeholder="Actividad"></div>
-          </div>
+          <div class="field half"><div class="control"><input type="text" id="nombre" name="nombre" placeholder="Nombre"></div></div>
+          <div class="field half"><div class="control"><input type="text" id="actividad" name="actividad" placeholder="Actividad"></div></div>
+          <div class="field third"><div class="control"><input type="date" id="fecha" name="fecha"></div></div>
+          <div class="field third"><div class="control"><input type="time" id="hora" name="hora"></div></div>
+          <div class="field third"><div class="control"><input type="text" id="conquien" name="conquien" placeholder="¿Con quién?"></div></div>
+          <div class="field half"><div class="control"><input type="text" id="direccion" name="direccion" placeholder="Dirección"></div></div>
+          <div class="field third"><div class="control"><input type="tel" id="telefono" name="telefono" placeholder="Teléfono"></div></div>
           <div class="field third">
-            <label class="label" for="fecha">Fecha</label>
-            <div class="control"><input type="date" id="fecha" name="fecha"></div>
-          </div>
-          <div class="field third">
-            <label class="label" for="hora">Hora</label>
-            <div class="control"><input type="time" id="hora" name="hora"></div>
-          </div>
-          <div class="field third">
-            <label class="label" for="conquien">¿Con quién?</label>
-            <div class="control"><input type="text" id="conquien" name="conquien"></div>
-          </div>
-          <div class="field half">
-            <label class="label" for="direccion">Dirección</label>
-            <div class="control"><input type="text" id="direccion" name="direccion"></div>
-          </div>
-          <div class="field third">
-            <label class="label" for="telefono">Teléfono</label>
-            <div class="control"><input type="tel" id="telefono" name="telefono"></div>
-          </div>
-          <div class="field third">
-            <label class="label" for="relacionado">Relacionado</label>
             <div class="control">
               <select id="relacionado" name="relacionado">
-                <option value="">Selecciona</option>
-                <option>Trabajo</option>
-                <option>Estudios</option>
-                <option>Personal</option>
-                <option>Salud</option>
-                <option>Otro</option>
+                <option value="">Relacionado</option>
+                <option>Trabajo</option><option>Estudios</option><option>Personal</option><option>Salud</option><option>Otro</option>
               </select>
             </div>
           </div>
-          <div class="field">
-            <label class="label" for="notas">Notas</label>
-            <div class="control"><textarea id="notas" name="notas"></textarea></div>
-          </div>
+          <div class="field"><div class="control"><textarea id="notas" name="notas" placeholder="Notas..."></textarea></div></div>
           <div class="actions">
             <button type="reset" class="btn secondary">Limpiar</button>
             <button type="submit" class="btn">Guardar</button>
+            <button type="button" id="verGuardadas" class="btn secondary">Ver actividades</button>
           </div>
         </form>
+
+        <!-- Lista de actividades guardadas -->
+        <div id="listaActividades"></div>
       </div>
     </div>
   </div>
 
   <script>
     const form = document.getElementById("formActividad");
+    const listaDiv = document.getElementById("listaActividades");
+    const verBtn = document.getElementById("verGuardadas");
 
-    // Al enviar, guardar en localStorage
-    form.addEventListener("submit", e => {
+    function cargarActividades(){
+      listaDiv.innerHTML="";
+      const actividades = JSON.parse(localStorage.getItem("actividades")||"[]");
+      actividades.forEach((act,i)=>{
+        const div=document.createElement("div");
+        div.className="actividad";
+        div.innerHTML=`
+          <div class="actividad-info">
+            <div class="actividad-titulo">${act.nombre||"Sin título"} — ${act.actividad||""}</div>
+            <div class="actividad-detalle">${act.fecha||""} ${act.hora||""} · ${act.conquien||""}</div>
+          </div>
+          <div class="actividad-acciones">
+            <button class="editar">Editar</button>
+            <button class="eliminar">Eliminar</button>
+          </div>`;
+        div.querySelector(".editar").onclick=()=>{
+          for(let k in act){ if(form[k]) form[k].value=act[k] }
+          listaDiv.classList.remove("mostrar");
+        }
+        div.querySelector(".eliminar").onclick=()=>{
+          actividades.splice(i,1);
+          localStorage.setItem("actividades",JSON.stringify(actividades));
+          cargarActividades();
+        }
+        listaDiv.appendChild(div);
+      });
+    }
+
+    form.addEventListener("submit",e=>{
       e.preventDefault();
-      const data = Object.fromEntries(new FormData(form).entries());
-      localStorage.setItem("actividadGuardada", JSON.stringify(data));
-      alert("✅ Actividad guardada en tu navegador");
+      const data=Object.fromEntries(new FormData(form).entries());
+      const actividades=JSON.parse(localStorage.getItem("actividades")||"[]");
+      actividades.push(data);
+      localStorage.setItem("actividades",JSON.stringify(actividades));
+      form.reset();
+      cargarActividades();
+      alert("✅ Actividad guardada");
     });
 
-    // Al cargar la página, rellenar si ya hay datos
-    window.addEventListener("DOMContentLoaded", () => {
-      const data = JSON.parse(localStorage.getItem("actividadGuardada") || "{}");
-      for (let key in data) {
-        if (form[key]) form[key].value = data[key];
-      }
+    verBtn.addEventListener("click",()=>{
+      listaDiv.classList.toggle("mostrar");
+      if(listaDiv.classList.contains("mostrar")) cargarActividades();
     });
   </script>
 </body>
