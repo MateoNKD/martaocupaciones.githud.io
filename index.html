@@ -1,178 +1,295 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MARTINA LA MEJOR PROFE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg1:#0f1021; --bg2:#1b1e36;
-      --ac1:#7c3aed; --ac2:#22d3ee; --ac3:#f472b6;
-      --card:#101225cc; --text:#e5e7eb; --muted:#9ca3af;
-      --ok:#10b981; --err:#ef4444;
-      --radius:1.25rem;
+    /* ====== Estilos generales ====== */
+    :root {
+      --ac1: #ff6ec7;
+      --ac2: #7ee8fa;
+      --bg: #0a0a1f;
     }
-    *{ box-sizing:border-box; }
-    body{
-      margin:0; font-family:"Poppins",sans-serif; color:var(--text);
-      background: linear-gradient(180deg,var(--bg1),var(--bg2));
-      min-height:100vh;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #1a1a40, #000);
+      color: #fff;
+      overflow-x: hidden;
     }
-    .wrap{ display:grid; place-items:center; padding:30px; }
-    .shell{
-      position:relative; border-radius: calc(var(--radius) + 8px); padding:2px;
-      background: conic-gradient(from var(--a), var(--ac1), var(--ac2), var(--ac3), var(--ac1));
-      animation: rotar 12s linear infinite;
-      box-shadow: 0 10px 40px -10px rgba(0,0,0,.7); width:100%; max-width:900px;
+    h1 {
+      text-align: center;
+      padding: 20px;
+      font-size: 2rem;
+      background: linear-gradient(90deg, var(--ac1), var(--ac2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .card{
-      border-radius:var(--radius);
-      background: linear-gradient(180deg, rgba(16,18,37,.8), rgba(16,18,37,.6));
-      backdrop-filter: blur(10px);
-      padding:24px; width:100%;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), 0 12px 40px rgba(0,0,0,.35);
+    section {
+      padding: 20px;
+      display: flex;
+      justify-content: center;
     }
-    @property --a{ syntax:'<angle>'; initial-value:0deg; inherits:false }
-    @keyframes rotar{ to{ --a:360deg } }
-    .header{ display:flex; align-items:center; gap:14px; margin-bottom:18px; }
-    .logo{ width:48px; height:48px; border-radius:14px; display:grid; place-items:center;
-      background: linear-gradient(135deg,var(--ac1),var(--ac2)); animation: flotar 4s infinite; }
-    .logo i{ font-style:normal; font-size:22px; font-weight:800 }
-    @keyframes flotar{ 0%,100%{ transform:translateY(0)} 50%{ transform:translateY(-6px)} }
-    .title{ font-size:24px; font-weight:700 }
-    .subtitle{ font-size:14px; color:var(--muted) }
-    form{ display:grid; grid-template-columns: repeat(12,1fr); gap:16px }
-    .field{ grid-column:span 12 }
-    @media(min-width:720px){
-      .field.half{ grid-column:span 6 }
-      .field.third{ grid-column:span 4 }
+
+    /* ====== Formulario ====== */
+    .formulario {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(12px);
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 1rem;
+      padding: 20px;
+      width: 100%;
+      max-width: 500px;
+      animation: fadeIn 1s ease;
     }
-    .control{ background:#0b0d1a; border:1px solid #ffffff14; border-radius:14px;
-      padding:16px; }
-    .control input,.control select,.control textarea{
-      width:100%; background:transparent; border:0; outline:0; color:var(--text);
+    .formulario h2 {
+      text-align: center;
+      margin-bottom: 15px;
     }
-    .actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:10px }
-    .btn{ padding:10px 16px; border-radius:999px; border:0; font-weight:600; cursor:pointer;
-      background:linear-gradient(135deg,var(--ac2),var(--ac1)); color:white; }
-    .btn.secondary{ background:#0b0d1a; border:1px solid #ffffff1a; }
-    /* ================== Lista actividades ================== */
-    #listaActividades{
-      margin-top:20px; max-height:0; overflow:hidden;
-      transition:max-height .7s ease, opacity .5s ease;
-      opacity:0;
+    .formulario label {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      opacity: 0.8;
     }
-    #listaActividades.mostrar{ max-height:500px; opacity:1; }
-    .actividad{
-      background:#0f1122; border:1px solid #ffffff22; border-radius:14px;
-      padding:14px 18px; margin-bottom:12px;
-      display:flex; justify-content:space-between; align-items:center;
-      animation: aparecer .5s ease forwards;
+    .formulario input, .formulario textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
     }
-    @keyframes aparecer{ from{ transform:translateY(15px); opacity:0 } to{ transform:translateY(0); opacity:1 } }
-    .actividad-info{ flex:1 }
-    .actividad-titulo{ font-weight:600 }
-    .actividad-detalle{ font-size:13px; color:var(--muted) }
-    .actividad-acciones button{
-      margin-left:8px; border:0; padding:6px 12px; border-radius:8px; cursor:pointer;
-      font-size:12px; font-weight:600;
+    .formulario button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1rem;
+      color: #fff;
+      cursor: pointer;
+      background: linear-gradient(90deg, var(--ac1), var(--ac2));
+      transition: transform .2s;
     }
-    .editar{ background:var(--ac2); color:#fff }
-    .eliminar{ background:var(--err); color:#fff }
+    .formulario button:hover {
+      transform: scale(1.05);
+    }
+
+    /* ====== Lista de actividades ====== */
+    #actividades {
+      flex-direction: column;
+      align-items: center;
+    }
+    .actividad {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 15px;
+      margin: 10px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      animation: slideIn .5s ease;
+    }
+    .actividad h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: var(--ac2);
+    }
+    .botones {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+    }
+    .botones button {
+      flex: 1;
+      padding: 6px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform .2s;
+    }
+    .botones button:hover {
+      transform: scale(1.1);
+    }
+    .ver { background: #28a745; color: white; }
+    .editar { background: #ffc107; color: black; }
+    .eliminar { background: #dc3545; color: white; }
+
+    /* ====== Modal ====== */
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      animation: scaleIn .3s ease;
+    }
+    .modal-content h2 {
+      margin-top: 0;
+      color: var(--ac1);
+    }
+    .close {
+      float: right;
+      cursor: pointer;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    /* ====== Animaciones ====== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes scaleIn {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="shell">
-      <div class="card">
-        <div class="header">
-          <div class="logo"><i>★</i></div>
-          <div>
-            <div class="title">MARTINA LA MEJOR PROFE</div>
-            <div class="subtitle">Agenda interactiva ✨</div>
-          </div>
-        </div>
+  <h1>🌟 MARTINA LA MEJOR PROFE 🌟</h1>
 
-        <!-- Formulario -->
-        <form id="formActividad">
-          <div class="field half"><div class="control"><input type="text" id="nombre" name="nombre" placeholder="Nombre"></div></div>
-          <div class="field half"><div class="control"><input type="text" id="actividad" name="actividad" placeholder="Actividad"></div></div>
-          <div class="field third"><div class="control"><input type="date" id="fecha" name="fecha"></div></div>
-          <div class="field third"><div class="control"><input type="time" id="hora" name="hora"></div></div>
-          <div class="field third"><div class="control"><input type="text" id="conquien" name="conquien" placeholder="¿Con quién?"></div></div>
-          <div class="field half"><div class="control"><input type="text" id="direccion" name="direccion" placeholder="Dirección"></div></div>
-          <div class="field third"><div class="control"><input type="tel" id="telefono" name="telefono" placeholder="Teléfono"></div></div>
-          <div class="field third">
-            <div class="control">
-              <select id="relacionado" name="relacionado">
-                <option value="">Relacionado</option>
-                <option>Trabajo</option><option>Estudios</option><option>Personal</option><option>Salud</option><option>Otro</option>
-              </select>
-            </div>
-          </div>
-          <div class="field"><div class="control"><textarea id="notas" name="notas" placeholder="Notas..."></textarea></div></div>
-          <div class="actions">
-            <button type="reset" class="btn secondary">Limpiar</button>
-            <button type="submit" class="btn">Guardar</button>
-            <button type="button" id="verGuardadas" class="btn secondary">Ver actividades</button>
-          </div>
-        </form>
+  <!-- Formulario -->
+  <section>
+    <form class="formulario" id="formulario">
+      <h2>Agregar Actividad</h2>
+      <label>Nombre:</label>
+      <input type="text" id="nombre" required>
+      <label>Actividad:</label>
+      <input type="text" id="actividad" required>
+      <label>Fecha:</label>
+      <input type="date" id="fecha" required>
+      <label>Hora:</label>
+      <input type="time" id="hora" required>
+      <label>Con quién debo hacerla:</label>
+      <input type="text" id="conquien">
+      <label>Dirección:</label>
+      <input type="text" id="direccion">
+      <label>Teléfono relacionado:</label>
+      <input type="tel" id="telefono">
+      <button type="submit">Guardar</button>
+    </form>
+  </section>
 
-        <!-- Lista de actividades guardadas -->
-        <div id="listaActividades"></div>
-      </div>
+  <!-- Actividades guardadas -->
+  <section id="actividades">
+    <h2>📌 Actividades Guardadas</h2>
+    <div id="lista"></div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <h2>Detalles</h2>
+      <div id="detalles"></div>
     </div>
   </div>
 
   <script>
-    const form = document.getElementById("formActividad");
-    const listaDiv = document.getElementById("listaActividades");
-    const verBtn = document.getElementById("verGuardadas");
+    const formulario = document.getElementById("formulario");
+    const lista = document.getElementById("lista");
+    const modal = document.getElementById("modal");
+    const detalles = document.getElementById("detalles");
 
-    function cargarActividades(){
-      listaDiv.innerHTML="";
-      const actividades = JSON.parse(localStorage.getItem("actividades")||"[]");
-      actividades.forEach((act,i)=>{
-        const div=document.createElement("div");
-        div.className="actividad";
-        div.innerHTML=`
-          <div class="actividad-info">
-            <div class="actividad-titulo">${act.nombre||"Sin título"} — ${act.actividad||""}</div>
-            <div class="actividad-detalle">${act.fecha||""} ${act.hora||""} · ${act.conquien||""}</div>
+    let actividades = JSON.parse(localStorage.getItem("actividades")) || [];
+    let editIndex = null;
+
+    function mostrarActividades() {
+      lista.innerHTML = "";
+      actividades.forEach((act, index) => {
+        const div = document.createElement("div");
+        div.className = "actividad";
+        div.innerHTML = `
+          <h3>${act.actividad}</h3>
+          <p><b>Fecha:</b> ${act.fecha} - <b>Hora:</b> ${act.hora}</p>
+          <div class="botones">
+            <button class="ver" onclick="verActividad(${index})">👀 Ver</button>
+            <button class="editar" onclick="editarActividad(${index})">✏️ Editar</button>
+            <button class="eliminar" onclick="eliminarActividad(${index})">🗑️ Eliminar</button>
           </div>
-          <div class="actividad-acciones">
-            <button class="editar">Editar</button>
-            <button class="eliminar">Eliminar</button>
-          </div>`;
-        div.querySelector(".editar").onclick=()=>{
-          for(let k in act){ if(form[k]) form[k].value=act[k] }
-          listaDiv.classList.remove("mostrar");
-        }
-        div.querySelector(".eliminar").onclick=()=>{
-          actividades.splice(i,1);
-          localStorage.setItem("actividades",JSON.stringify(actividades));
-          cargarActividades();
-        }
-        listaDiv.appendChild(div);
+        `;
+        lista.appendChild(div);
       });
     }
 
-    form.addEventListener("submit",e=>{
+    formulario.addEventListener("submit", e => {
       e.preventDefault();
-      const data=Object.fromEntries(new FormData(form).entries());
-      const actividades=JSON.parse(localStorage.getItem("actividades")||"[]");
-      actividades.push(data);
-      localStorage.setItem("actividades",JSON.stringify(actividades));
-      form.reset();
-      cargarActividades();
-      alert("✅ Actividad guardada");
+      const actividad = {
+        nombre: document.getElementById("nombre").value,
+        actividad: document.getElementById("actividad").value,
+        fecha: document.getElementById("fecha").value,
+        hora: document.getElementById("hora").value,
+        conquien: document.getElementById("conquien").value,
+        direccion: document.getElementById("direccion").value,
+        telefono: document.getElementById("telefono").value
+      };
+
+      if (editIndex === null) {
+        actividades.push(actividad);
+      } else {
+        actividades[editIndex] = actividad;
+        editIndex = null;
+      }
+
+      localStorage.setItem("actividades", JSON.stringify(actividades));
+      formulario.reset();
+      mostrarActividades();
     });
 
-    verBtn.addEventListener("click",()=>{
-      listaDiv.classList.toggle("mostrar");
-      if(listaDiv.classList.contains("mostrar")) cargarActividades();
-    });
+    function verActividad(i) {
+      const act = actividades[i];
+      detalles.innerHTML = `
+        <p><b>Nombre:</b> ${act.nombre}</p>
+        <p><b>Actividad:</b> ${act.actividad}</p>
+        <p><b>Fecha:</b> ${act.fecha}</p>
+        <p><b>Hora:</b> ${act.hora}</p>
+        <p><b>Con quién:</b> ${act.conquien}</p>
+        <p><b>Dirección:</b> ${act.direccion}</p>
+        <p><b>Teléfono:</b> ${act.telefono}</p>
+      `;
+      modal.style.display = "flex";
+    }
+    function cerrarModal() {
+      modal.style.display = "none";
+    }
+    function editarActividad(i) {
+      const act = actividades[i];
+      document.getElementById("nombre").value = act.nombre;
+      document.getElementById("actividad").value = act.actividad;
+      document.getElementById("fecha").value = act.fecha;
+      document.getElementById("hora").value = act.hora;
+      document.getElementById("conquien").value = act.conquien;
+      document.getElementById("direccion").value = act.direccion;
+      document.getElementById("telefono").value = act.telefono;
+      editIndex = i;
+    }
+    function eliminarActividad(i) {
+      actividades.splice(i, 1);
+      localStorage.setItem("actividades", JSON.stringify(actividades));
+      mostrarActividades();
+    }
+
+    mostrarActividades();
   </script>
 </body>
 </html>
