@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agenda de Actividad — Formulario Animado</title>
+  <title>MARTINA LA MEJOR PROFE</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    /* ============ Tus estilos tal cual ============ */
     :root{
-      --bg1:#0f1021;   /* Fondo base */
-      --bg2:#1b1e36;   /* Fondo secundario */
-      --ac1:#7c3aed;   /* Morado */
-      --ac2:#22d3ee;   /* Cian */
-      --ac3:#f472b6;   /* Rosa */
-      --card:#101225cc;/* Vidrio */
-      --text:#e5e7eb;  /* Texto */
-      --muted:#9ca3af; /* Muted */
-      --ok:#10b981;    /* Verde */
-      --warn:#f59e0b;  /* Amarillo */
-      --err:#ef4444;   /* Rojo */
+      --bg1:#0f1021;
+      --bg2:#1b1e36;
+      --ac1:#7c3aed;
+      --ac2:#22d3ee;
+      --ac3:#f472b6;
+      --card:#101225cc;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --ok:#10b981;
+      --warn:#f59e0b;
+      --err:#ef4444;
       --radius:1.25rem;
     }
-
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
     body{
@@ -33,8 +33,7 @@
                   linear-gradient(180deg, var(--bg1), var(--bg2));
       overflow-x:hidden;
     }
-
-    /* Fondo animado: estrellas + orbes */
+    /* Fondo animado */
     .constelaciones, .constelaciones::before, .constelaciones::after{
       position:fixed; inset:0; content:""; pointer-events:none;
     }
@@ -67,16 +66,11 @@
     @keyframes estrellas{ 0%{ transform:translateY(0) } 100%{ transform:translateY(100vh) } }
     @keyframes orbes{ from{ transform:translateY(-20px)} to{ transform:translateY(20px)} }
 
-    /* Contenedor principal */
-    .wrap{
-      min-height:100dvh; display:grid; place-items:center; padding: clamp(16px, 4vw, 48px);
-    }
-
-    /* Tarjeta con borde animado */
+    /* Contenedor */
+    .wrap{ min-height:100dvh; display:grid; place-items:center; padding: clamp(16px, 4vw, 48px); }
     .shell{
       position:relative; border-radius: calc(var(--radius) + 8px); padding:2px;
-      background:
-        conic-gradient(from var(--a), var(--ac1), var(--ac2), var(--ac3), var(--ac1));
+      background: conic-gradient(from var(--a), var(--ac1), var(--ac2), var(--ac3), var(--ac1));
       animation: rotar 12s linear infinite;
       box-shadow: 0 10px 40px -10px rgba(0,0,0,.7);
     }
@@ -91,198 +85,88 @@
     }
     @property --a{ syntax: '<angle>'; initial-value: 0deg; inherits: false; }
     @keyframes rotar{ to{ --a: 360deg } }
-
-    /* Header */
-    .header{
-      display:flex; align-items:center; gap:14px; margin-bottom: 22px;
-    }
+    .header{ display:flex; align-items:center; gap:14px; margin-bottom: 22px; }
     .logo{
       width:48px; height:48px; border-radius:14px; display:grid; place-items:center;
       background: radial-gradient(circle at 30% 30%, #ffffff22 0 30%, transparent 35%),
                   linear-gradient(135deg, var(--ac1), var(--ac2));
       animation: flotar 4s ease-in-out infinite;
     }
-    .logo i{ font-style:normal; font-weight:800; font-size:22px; text-shadow:0 2px 10px rgba(0,0,0,.35) }
+    .logo i{ font-style:normal; font-weight:800; font-size:22px; }
     @keyframes flotar { 0%,100%{ transform:translateY(0)} 50%{ transform:translateY(-6px)} }
-
-    .title{ font-size: clamp(20px, 3.2vw, 30px); font-weight:700; letter-spacing:.2px; }
+    .title{ font-size: clamp(20px, 3.2vw, 30px); font-weight:700; }
     .subtitle{ color:var(--muted); font-size: clamp(12px, 2.2vw, 14px); margin-top:2px }
-
-    /* Form */
     form{ display:grid; grid-template-columns: repeat(12, 1fr); gap:16px; }
-
-    .field{
-      grid-column: span 12;
-      position:relative; isolation:isolate; 
-    }
+    .field{ grid-column: span 12; position:relative; }
     @media (min-width:720px){
       .field.half{ grid-column: span 6; }
       .field.third{ grid-column: span 4; }
     }
-
     .control{
-      position:relative; 
       background: #0b0d1a; border:1px solid #ffffff14; border-radius:14px; 
       padding: 22px 16px 10px 16px; color:var(--text);
-      transition: border-color .25s, box-shadow .25s, transform .15s;
-      box-shadow: 0 8px 22px rgba(0,0,0,.25);
     }
-
-    .control input,
-    .control select,
-    .control textarea{
+    .control input, .control select, .control textarea{
       width:100%; background:transparent; border:0; outline:0; color:var(--text);
       font-size: clamp(14px, 2.6vw, 16px);
-      caret-color: var(--ac2);
     }
-    .control textarea{ resize:vertical; min-height:96px; }
-
-    .label{
-      position:absolute; left:14px; top:10px; z-index:2; 
-      font-size:12px; color:var(--muted); letter-spacing:.3px;
-      transition: transform .2s ease, opacity .2s ease;
-      transform-origin:left top;
-    }
-
-    .control:has(input:focus),
-    .control:has(select:focus),
-    .control:has(textarea:focus){
-      border-color: #ffffff28; box-shadow: 0 0 0 4px #7c3aed33, 0 0 0 1px #ffffff22 inset; 
-      transform: translateY(-1px);
-    }
-
-    /* Placeholder fantasma para disparar floating label */
-    .ghost::placeholder{ opacity:0 }
-
-    /* Chips auxiliares */
-    .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px }
-    .chip{
-      font-size:11px; color:#d1d5db; border:1px dashed #ffffff2a; padding:6px 10px; border-radius:999px;
-      background: #0b0d1a; opacity:.85;
-      transition: transform .15s ease;
-    }
-    .chip:hover{ transform: translateY(-2px); }
-
-    /* Footer */
+    .label{ position:absolute; left:14px; top:10px; font-size:12px; color:var(--muted); }
     .actions{ display:flex; gap:12px; justify-content:flex-end; margin-top:8px }
     .btn{
-      appearance:none; border:0; cursor:pointer; font-weight:600; letter-spacing:.3px;
-      padding: 12px 18px; border-radius: 999px; 
+      padding: 12px 18px; border-radius: 999px; font-weight:600;
       background: linear-gradient(135deg, var(--ac2), var(--ac1));
-      color:white; box-shadow: 0 10px 24px rgba(0,0,0,.35), 0 0 0 0 rgba(124,58,237,.4);
-      transition: transform .15s ease, box-shadow .3s ease;
+      color:white; border:0; cursor:pointer;
     }
-    .btn:hover{ transform: translateY(-2px); box-shadow: 0 14px 28px rgba(0,0,0,.4), 0 0 0 10px rgba(124,58,237,.06) }
-    .btn:active{ transform: translateY(0) scale(.98) }
-    .btn.secondary{
-      background: #0b0d1a; color:#e5e7eb; border:1px solid #ffffff1a;
-    }
-
-    /* Badges decorativos */
-    .badges{
-      position:absolute; right:16px; top:16px; display:flex; gap:8px; z-index:2;
-    }
-    .badge{
-      font-size:10px; text-transform:uppercase; letter-spacing:.6px; padding:6px 10px; border-radius:999px;
-      background:#ffffff14; border:1px solid #ffffff28;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-    }
-
-    /* Tooltip accesible */
-    .hint{ color:var(--muted); font-size:12px; margin-top:6px }
-
+    .btn.secondary{ background: #0b0d1a; border:1px solid #ffffff1a; }
   </style>
 </head>
 <body>
   <div class="constelaciones"></div>
-
   <div class="wrap">
     <div class="shell">
-      <div class="card" role="region" aria-labelledby="titulo-form">
-        <div class="badges">
-          <span class="badge">Agenda</span>
-          <span class="badge">Interactivo</span>
-        </div>
+      <div class="card">
         <div class="header">
-          <div class="logo" aria-hidden="true"><i>★</i></div>
+          <div class="logo"><i>★</i></div>
           <div>
-            <div id="titulo-form" class="title">Crear nueva actividad</div>
-            <div class="subtitle">Completa los campos para guardar tu evento ✨</div>
+            <div class="title">MARTINA LA MEJOR PROFE</div>
+            <div class="subtitle">Completa los campos y se guardarán ✨</div>
           </div>
         </div>
 
-        <form autocomplete="on">
-          <!-- Nombre -->
+        <form id="formActividad">
           <div class="field half">
             <label class="label" for="nombre">Nombre</label>
-            <div class="control">
-              <input class="ghost" type="text" id="nombre" name="nombre" placeholder="Nombre de la actividad" required>
-            </div>
-            <div class="hint">Ej: "Entrega de informe"</div>
+            <div class="control"><input type="text" id="nombre" name="nombre" placeholder="Nombre"></div>
           </div>
-
-          <!-- Actividad -->
           <div class="field half">
             <label class="label" for="actividad">Actividad</label>
-            <div class="control">
-              <input class="ghost" type="text" id="actividad" name="actividad" placeholder="Tipo de actividad" list="actividades">
-              <datalist id="actividades">
-                <option>Reunión</option>
-                <option>Llamada</option>
-                <option>Entrega</option>
-                <option>Visita</option>
-                <option>Clase</option>
-              </datalist>
-            </div>
+            <div class="control"><input type="text" id="actividad" name="actividad" placeholder="Actividad"></div>
           </div>
-
-          <!-- Fecha -->
           <div class="field third">
             <label class="label" for="fecha">Fecha</label>
-            <div class="control">
-              <input class="ghost" type="date" id="fecha" name="fecha" required>
-            </div>
+            <div class="control"><input type="date" id="fecha" name="fecha"></div>
           </div>
-
-          <!-- Hora -->
           <div class="field third">
             <label class="label" for="hora">Hora</label>
-            <div class="control">
-              <input class="ghost" type="time" id="hora" name="hora" required>
-            </div>
+            <div class="control"><input type="time" id="hora" name="hora"></div>
           </div>
-
-          <!-- Con quién debo hacerla -->
           <div class="field third">
-            <label class="label" for="conquien">¿Con quién debo hacerla?</label>
-            <div class="control">
-              <input class="ghost" type="text" id="conquien" name="conquien" placeholder="Nombre(s) o equipo">
-            </div>
+            <label class="label" for="conquien">¿Con quién?</label>
+            <div class="control"><input type="text" id="conquien" name="conquien"></div>
           </div>
-
-          <!-- Dirección -->
           <div class="field half">
             <label class="label" for="direccion">Dirección</label>
-            <div class="control">
-              <input class="ghost" type="text" id="direccion" name="direccion" placeholder="Lugar o enlace">
-            </div>
+            <div class="control"><input type="text" id="direccion" name="direccion"></div>
           </div>
-
-          <!-- Teléfono -->
           <div class="field third">
             <label class="label" for="telefono">Teléfono</label>
-            <div class="control">
-              <input class="ghost" type="tel" id="telefono" name="telefono" inputmode="tel" placeholder="Ej: +57 300 123 4567" pattern="[+0-9 ]{7,20}">
-            </div>
+            <div class="control"><input type="tel" id="telefono" name="telefono"></div>
           </div>
-
-          <!-- Relacionado -->
           <div class="field third">
             <label class="label" for="relacionado">Relacionado</label>
             <div class="control">
               <select id="relacionado" name="relacionado">
-                <option value="" selected>Selecciona una opción</option>
+                <option value="">Selecciona</option>
                 <option>Trabajo</option>
                 <option>Estudios</option>
                 <option>Personal</option>
@@ -291,27 +175,37 @@
               </select>
             </div>
           </div>
-
-          <!-- Notas -->
           <div class="field">
             <label class="label" for="notas">Notas</label>
-            <div class="control">
-              <textarea class="ghost" id="notas" name="notas" placeholder="Detalles adicionales, enlaces, objetivos..."></textarea>
-            </div>
-            <div class="chips" aria-hidden="true">
-              <span class="chip">#prioridad-media</span>
-              <span class="chip">#recordatorio</span>
-              <span class="chip">#presencial</span>
-            </div>
+            <div class="control"><textarea id="notas" name="notas"></textarea></div>
           </div>
-
           <div class="actions">
-            <button type="reset" class="btn secondary" title="Limpiar">Limpiar</button>
-            <button type="submit" class="btn" title="Guardar">Guardar actividad</button>
+            <button type="reset" class="btn secondary">Limpiar</button>
+            <button type="submit" class="btn">Guardar</button>
           </div>
         </form>
       </div>
     </div>
   </div>
+
+  <script>
+    const form = document.getElementById("formActividad");
+
+    // Al enviar, guardar en localStorage
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      localStorage.setItem("actividadGuardada", JSON.stringify(data));
+      alert("✅ Actividad guardada en tu navegador");
+    });
+
+    // Al cargar la página, rellenar si ya hay datos
+    window.addEventListener("DOMContentLoaded", () => {
+      const data = JSON.parse(localStorage.getItem("actividadGuardada") || "{}");
+      for (let key in data) {
+        if (form[key]) form[key].value = data[key];
+      }
+    });
+  </script>
 </body>
 </html>
