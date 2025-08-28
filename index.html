@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MARTINA LA MEJOR PROFE</title>
   <style>
-    /* ====== Estilos generales ====== */
     :root {
       --ac1: #ff6ec7;
       --ac2: #7ee8fa;
@@ -26,13 +25,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    section {
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-    }
-
-    /* ====== Formulario ====== */
+    section { padding: 20px; display: flex; justify-content: center; }
     .formulario {
       background: rgba(255,255,255,0.05);
       backdrop-filter: blur(12px);
@@ -41,49 +34,15 @@
       padding: 20px;
       width: 100%;
       max-width: 500px;
-      animation: fadeIn 1s ease;
     }
-    .formulario h2 {
-      text-align: center;
-      margin-bottom: 15px;
-    }
-    .formulario label {
-      display: block;
-      margin-top: 10px;
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
-    .formulario input, .formulario textarea {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-      background: rgba(255,255,255,0.1);
-      color: #fff;
-    }
+    .formulario h2 { text-align: center; margin-bottom: 15px; }
+    .formulario label { display: block; margin-top: 10px; font-size: 0.9rem; opacity: 0.8; }
+    .formulario input { width: 100%; padding: 8px; margin-top: 5px; border-radius: 8px; border: none; outline: none; background: rgba(255,255,255,0.1); color: #fff; }
     .formulario button {
-      margin-top: 15px;
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 10px;
-      font-weight: bold;
-      font-size: 1rem;
-      color: #fff;
-      cursor: pointer;
+      margin-top: 15px; width: 100%; padding: 10px;
+      border: none; border-radius: 10px; font-weight: bold; font-size: 1rem;
+      color: #fff; cursor: pointer;
       background: linear-gradient(90deg, var(--ac1), var(--ac2));
-      transition: transform .2s;
-    }
-    .formulario button:hover {
-      transform: scale(1.05);
-    }
-
-    /* ====== Lista de actividades ====== */
-    #actividades {
-      flex-direction: column;
-      align-items: center;
     }
     .actividad {
       background: rgba(255,255,255,0.08);
@@ -93,76 +52,26 @@
       border-radius: 12px;
       width: 90%;
       max-width: 500px;
-      animation: slideIn .5s ease;
     }
-    .actividad h3 {
-      margin: 0;
-      font-size: 1.2rem;
-      color: var(--ac2);
-    }
-    .botones {
-      margin-top: 10px;
-      display: flex;
-      gap: 10px;
-    }
+    .actividad h3 { margin: 0; font-size: 1.2rem; color: var(--ac2); }
+    .botones { margin-top: 10px; display: flex; gap: 10px; }
     .botones button {
-      flex: 1;
-      padding: 6px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: transform .2s;
-    }
-    .botones button:hover {
-      transform: scale(1.1);
+      flex: 1; padding: 6px; border: none; border-radius: 8px;
+      cursor: pointer; font-weight: bold;
     }
     .ver { background: #28a745; color: white; }
     .editar { background: #ffc107; color: black; }
     .eliminar { background: #dc3545; color: white; }
-
-    /* ====== Modal ====== */
     .modal {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      display: none;
-      align-items: center;
-      justify-content: center;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center;
     }
     .modal-content {
-      background: rgba(255,255,255,0.1);
-      padding: 20px;
-      border-radius: 15px;
-      width: 90%;
-      max-width: 400px;
-      animation: scaleIn .3s ease;
+      background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px;
+      width: 90%; max-width: 400px;
     }
-    .modal-content h2 {
-      margin-top: 0;
-      color: var(--ac1);
-    }
-    .close {
-      float: right;
-      cursor: pointer;
-      font-weight: bold;
-      color: #fff;
-    }
-
-    /* ====== Animaciones ====== */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateX(-50px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    @keyframes scaleIn {
-      from { transform: scale(0.7); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
+    .modal-content h2 { margin-top: 0; color: var(--ac1); }
+    .close { float: right; cursor: pointer; font-weight: bold; color: #fff; }
   </style>
 </head>
 <body>
@@ -211,8 +120,8 @@
     const modal = document.getElementById("modal");
     const detalles = document.getElementById("detalles");
 
-    let actividades = JSON.parse(localStorage.getItem("actividades")) || [];
-    let editIndex = null;
+    // 👉 Guardamos las actividades en el propio HTML
+    let actividades = [];
 
     function mostrarActividades() {
       lista.innerHTML = "";
@@ -243,17 +152,10 @@
         direccion: document.getElementById("direccion").value,
         telefono: document.getElementById("telefono").value
       };
-
-      if (editIndex === null) {
-        actividades.push(actividad);
-      } else {
-        actividades[editIndex] = actividad;
-        editIndex = null;
-      }
-
-      localStorage.setItem("actividades", JSON.stringify(actividades));
+      actividades.push(actividad);
       formulario.reset();
       mostrarActividades();
+      descargarHTML(); // 👉 genera el archivo con datos
     });
 
     function verActividad(i) {
@@ -269,9 +171,7 @@
       `;
       modal.style.display = "flex";
     }
-    function cerrarModal() {
-      modal.style.display = "none";
-    }
+    function cerrarModal() { modal.style.display = "none"; }
     function editarActividad(i) {
       const act = actividades[i];
       document.getElementById("nombre").value = act.nombre;
@@ -281,15 +181,32 @@
       document.getElementById("conquien").value = act.conquien;
       document.getElementById("direccion").value = act.direccion;
       document.getElementById("telefono").value = act.telefono;
-      editIndex = i;
+      actividades.splice(i, 1);
+      mostrarActividades();
     }
     function eliminarActividad(i) {
       actividades.splice(i, 1);
-      localStorage.setItem("actividades", JSON.stringify(actividades));
       mostrarActividades();
+      descargarHTML();
     }
 
-    mostrarActividades();
+    // 👉 Generar un nuevo HTML con actividades incluidas
+    function descargarHTML() {
+      const contenido = `
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><title>Actividades</title></head>
+<body><h1>Actividades Guardadas</h1>
+<pre>${JSON.stringify(actividades, null, 2)}</pre>
+</body></html>`;
+      const blob = new Blob([contenido], {type: "text/html"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "actividades.html";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
   </script>
 </body>
 </html>
